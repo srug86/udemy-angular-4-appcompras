@@ -1,0 +1,17 @@
+<h3>List of Providers</h3>
+<table class="table table-bordered table-striped" style="margin-top: 40px">
+  <thead>
+    <tr class="filters">
+      <th>Name</th>
+      <th>Email</th>
+      <th>Phone</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let provider of providers">
+      <td>{{ provider.name }}</td>
+      <td><a href="mailto:{{ provider.email }}">{{ provider.email }}</a></td>
+      <td>{{ provider.phone }}</td>
+    </tr>
+  </tbody>
+</table>
