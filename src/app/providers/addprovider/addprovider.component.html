@@ -1,0 +1,114 @@
+<div class="row">
+  <div class="col col-md"></div>
+  <div class="col-10 col-md-8">
+    <h2>Add new provider</h2>
+    <form (ngSubmit)="onSubmit()" #formpro="ngForm">
+      <div class="form-group">
+        <label>Name</label>
+        <input type="text" 
+               class="form-control"
+               id="name"
+               name="name"
+               ngModel>
+      </div>
+      <div class="form-group">
+        <label>C.I.F.</label>
+        <input type="text" 
+               class="form-control"
+               id="cif"
+               name="cif"
+               ngModel>
+      </div>
+      <div class="form-group">
+        <label>Address</label>
+        <input type="text" 
+               class="form-control"
+               id="address"
+               name="address"
+               ngModel>
+      </div>
+      <div class="form-group">
+        <label>Zip Code</label>
+        <input type="text" 
+               class="form-control"
+               id="zip"
+               name="zip"
+               ngModel>
+      </div>
+      <div class="form-group">
+        <label>City</label>
+        <input type="text" 
+               class="form-control"
+               id="city" 
+               name="city"
+               ngModel>
+      </div>
+      <div class="form-group">
+        <label>State</label>
+        <select class="form-control" 
+                name="state"
+                id="state"
+                ngModel>
+                <option value="">Select one state</option>
+                <option *ngFor="let state of states" [value]="state">
+                  {{ state }}
+                </option>
+        </select>
+      </div>        
+      <div class="form-group">
+        <label>Phone</label>
+        <input type="number" 
+               class="form-control"
+               id="phone"
+               name="phone"
+               ngModel>
+      </div>
+      <div class="form-group">
+        <label>E-mail</label>
+        <i class="fa fa-check-circle check" 
+           *ngIf="email.valid"></i>
+        <i class="fa fa-exclamation-circle uncheck" 
+           *ngIf="email.invalid && email.touched"></i>
+        <input type="text" 
+               class="form-control"
+               id="email"
+               name="email"
+               ngModel
+               required
+               email
+               #email="ngModel">
+        <p class="alert alert-danger"
+           *ngIf="email.invalid && email.touched">
+           Please, specify a valid email address
+        </p>
+      </div>
+      <div class="form-group">
+        <label>Contact</label>
+        <input type="text" 
+               class="form-control"
+               id="contact"
+               name="contact"
+               ngModel>
+      </div>
+      <button type="submit" 
+              class="btn btn-success"
+              [disabled]="!formpro.valid">
+              Add Provider
+      </button>
+      <p class="alert alert-danger"
+         *ngIf="!formpro.valid">
+         Please, complete all mandatory fields
+      </p>
+    </form>
+    <hr>
+    <pre>
+      {{ provider | json }}
+    </pre>
+    <h4>Estado dirty: {{ formpro.controls.email.dirty }}</h4>
+    <h4>Estado pristine: {{ formpro.controls.email.pristine }}</h4>
+    <h4>Estado touched: {{ formpro.controls.email.touched }}</h4>
+    <h4>Estado valid: {{ formpro.controls.email.valid }}</h4>
+    <h4>Estado invalid: {{ formpro.controls.email.invalid }}</h4>
+  </div>
+  <div class="col col-md"></div>
+</div>

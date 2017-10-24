@@ -1,0 +1,91 @@
+<div class="row">
+  <div class="col col-md"></div>
+  <div class="col-10 col-md-8">
+    <h2>Add new Budget</h2>
+    <form [formGroup]="budgetForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="provider">Provider</label>
+        <i class="fa fa-check-circle check"
+           *ngIf="budgetForm.controls.provider.valid"></i>
+        <i class="fa fa-exclamation-circle uncheck"
+           *ngIf="budgetForm.controls.provider.invalid && budgetForm.controls.provider.touched"></i>
+        <input type="text"
+               class="form-control"
+               id="provider"
+               formControlName="provider">
+        <p class="alert alert-danger"
+           *ngIf="budgetForm.controls.provider.invalid && budgetForm.controls.provider.touched">
+           This field is a mandatory field
+        </p>
+      </div>
+      <div class="form-group">
+        <label for="date">Date</label>
+        <input type="date"
+               class="form-control"
+               id="date"
+               formControlName="date">
+      </div>
+      <div class="form-group">
+        <label for="concept">Concept</label>
+        <input type="text"
+               class="form-control"
+               id="concept"
+               formControlName="concept">
+      </div>
+      <div class="form-group">
+        <label for="base">Tax Base</label>
+        <input type="number"
+               class="form-control"
+               id="base"
+               formControlName="base">
+      </div>
+      <div class="form-group">
+        <label for="type">Type of tax</label>
+        <select class="form-control"
+                id="type"
+                formControlName="type">
+                <option value="">Select...</option>
+                <option value=0> 4 %</option>
+                <option value=0.1> 10 %</option>
+                <option value=0.21> 21 %</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="tax">Tax</label>
+        <input type="number"
+               class="form-control"
+               id="tax"
+               formControlName="tax"
+               [(ngModel)]="budgetForm.value.tax"
+               disabled>
+      </div>
+      <div class="form-group">
+        <label for="total">Total</label>
+        <input type="number"
+               class="form-control"
+               id="total"
+               formControlName="total"
+               [(ngModel)]="budgetForm.value.total"
+               disabled>
+      </div>
+      <button type="submit"
+              class="btn btn-primary"
+              [disabled]="!budgetForm.valid">
+              Add Budget
+      </button>
+      <p class="alert alert-danger" *ngIf="!budgetForm.valid">
+        Please, complete all mandatory fields.
+      </p>
+    </form>
+    <pre>
+      Form Values: {{ budgetForm.value | json }}
+    </pre>
+    <pre>
+      Form Status: {{ budgetForm.status | json }}
+    </pre>
+    <pre>
+      Object Values: {{ budget | json }}
+    </pre>
+  </div>
+  <div class="col col-md"></div>
+</div>
