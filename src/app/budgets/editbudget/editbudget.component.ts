@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { BudgetsService } from './../../services/budgets.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-addbudget',
-  templateUrl: './addbudget.component.html',
-  styleUrls: ['./addbudget.component.css']
+  selector: 'app-editbudget',
+  templateUrl: './editbudget.component.html',
+  styleUrls: ['./editbudget.component.css']
 })
-export class AddbudgetComponent implements OnInit {
+export class EditbudgetComponent implements OnInit {
 
   budgetForm: FormGroup;
   budget: any;
@@ -16,8 +17,21 @@ export class AddbudgetComponent implements OnInit {
   tax: any = 0;
   total: any = 0;
 
+  id: string;
+
   constructor(private bf: FormBuilder,
-              private budgetService: BudgetsService) { }
+              private budgetService: BudgetsService,
+              private router: Router,
+              private activatedRouter: ActivatedRoute) {
+                this.activatedRouter.params
+                  .subscribe(params => {
+                    this.id = params['id'];
+                    this.budgetService.getBudget(this.id)
+                      .subscribe(budget => {
+                        this.budget = budget;
+                      });
+                  });
+              }
 
   ngOnInit() {
     this.budgetForm = this.bf.group({
@@ -44,9 +58,9 @@ export class AddbudgetComponent implements OnInit {
 
   onSubmit() {
     this.budget = this.saveBudget();
-    this.budgetService.postBudget(this.budget)
+    this.budgetService.putBudget(this.budget, this.id)
       .subscribe(newBudget => {
-
+        this.router.navigate(['/budgets']);
       });
     this.budgetForm.reset();
   }

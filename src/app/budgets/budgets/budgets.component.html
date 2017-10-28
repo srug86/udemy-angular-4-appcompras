@@ -1,0 +1,38 @@
+<h3>List of Budgets</h3>
+<a class="btn btn-primary float-md-right" routerLink="/addbudget">Add new budget</a>
+<table class="table table-bordered table-striped" style="margin-top: 40px">
+  <thead>
+    <tr class="filters">
+      <th>Provider</th>
+      <th>Date</th>
+      <th>Concept</th>
+      <th>Base</th>
+      <th>Tax</th>
+      <th>Total</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let budget of budgets">
+      <td>{{ budget.provider }}</td>
+      <td>{{ budget.date }}</td>
+      <td>{{ budget.concept }}</td>
+      <td>{{ budget.base }}</td>
+      <td>{{ budget.tax }}</td>
+      <td>{{ budget.total }}</td>
+      <td>
+        <button type="button" class="btn btn-success"
+                routerLink="/editbudget/{{ budget.id }}">
+                Edit
+        </button>
+      </td>
+      <td>
+        <button type="button" class="btn btn-danger"
+                (click)="deleteBudget(budget.id)">
+                Delete
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
