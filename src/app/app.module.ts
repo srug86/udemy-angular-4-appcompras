@@ -11,19 +11,40 @@ import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
 import { AddproviderComponent } from './providers/addprovider/addprovider.component';
 import { AddbudgetComponent } from './budgets/addbudget/addbudget.component';
+import { BudgetsComponent } from './budgets/budgets/budgets.component';
+import { EditbudgetComponent } from './budgets/editbudget/editbudget.component';
+import { RegistrationComponent } from './authentication/registration/registration.component';
+import { LoginComponent } from './authentication/login/login.component';
 
 import { ProvidersService } from './services/providers.service';
 import { BudgetsService } from './services/budgets.service';
-import { BudgetsComponent } from './budgets/budgets/budgets.component';
-import { EditbudgetComponent } from './budgets/editbudget/editbudget.component';
+import { AuthenticationService } from './services/authentication.service';
+import { GuardService } from './services/guard.service';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'providers', component: ProvidersComponent },
-  { path: 'addprovider', component: AddproviderComponent },
-  { path: 'addbudget', component: AddbudgetComponent },
-  { path: 'budgets', component: BudgetsComponent },
-  { path: 'editbudget/:id', component: EditbudgetComponent },
+  {
+    path: 'providers', component: ProvidersComponent,
+    canActivate: [GuardService]
+  },
+  {
+    path: 'addprovider', component: AddproviderComponent,
+    canActivate: [GuardService]
+  },
+  {
+    path: 'addbudget', component: AddbudgetComponent,
+    canActivate: [GuardService]
+  },
+  {
+    path: 'budgets', component: BudgetsComponent,
+    canActivate: [GuardService]
+  },
+  {
+    path: 'editbudget/:id', component: EditbudgetComponent,
+    canActivate: [GuardService]
+  },
+  { path: 'registration', component : RegistrationComponent },
+  { path: 'login', component : LoginComponent },
   { path: '**', component: HomeComponent }
 ];
 
@@ -36,7 +57,9 @@ const routes: Routes = [
     AddproviderComponent,
     AddbudgetComponent,
     BudgetsComponent,
-    EditbudgetComponent
+    EditbudgetComponent,
+    RegistrationComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +68,12 @@ const routes: Routes = [
     ReactiveFormsModule,
     HttpModule
   ],
-  providers: [ProvidersService, BudgetsService],
+  providers: [
+    ProvidersService,
+    BudgetsService,
+    AuthenticationService,
+    GuardService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

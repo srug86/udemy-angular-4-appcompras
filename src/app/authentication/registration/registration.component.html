@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col col-md"></div>
+  <div class="col-10 col-md-6">
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+      <h4>Enter your registration data</h4>
+      <label>Email</label>
+      <input type="mail" class="form-control"
+             id="inputEmail" autofocus
+             formControlName="email">
+      <p class="alert alert-danger" *ngIf="errorsForm.email">
+        {{ errorsForm.email }}
+      </p>
+      <label>Password</label>
+      <input type="password" class="form-control"
+             id="inputPassword"
+             formControlName="password">
+      <p class="alert alert-danger" *ngIf="errorsForm.password">
+        {{ errorsForm.password }}
+      </p>
+      <hr>
+      <button type="submit" class="btn btn-primary"
+              [disabled]="!registrationForm.valid">
+              Sign up
+      </button>
+    </form>
+    <p>If you already have an account, press <a routerLink="/login">here</a></p>
+  </div>
+  <div class="col col-md"></div>
+</div>

@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="col col-md"></div>
+  <div class="col-10 col-md-6">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <h4>Enter your login data</h4>
+      <label>Email</label>
+      <input type="mail" class="form-control"
+             id="inputEmail" autofocus
+             formControlName="email">
+      <label>Password</label>
+      <input type="password" class="form-control"
+             id="inputPassword"
+             formControlName="password">
+      <hr>
+      <button type="submit" class="btn btn-primary"
+              [disabled]="!loginForm.valid">
+              Log in
+      </button>
+    </form>
+    <p>If you don't have an account yet, press <a routerLink="/registration">here</a></p>
+    <p class="alert alert-danger" *ngIf="message">
+      Username or password are invalid
+    </p>
+  </div>
+  <div class="col col-md"></div>
+</div>
